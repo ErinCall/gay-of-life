@@ -26,7 +26,7 @@
   margin: 0;
 }
 
-.Game {
+.Gameboard {
   display: table;
   width: calc(min(90vh, 100vw));
   height: calc(min(90vh, 100vw));
@@ -45,5 +45,12 @@
   border-color: var(--neutral);
   text-align: center;
   vertical-align: middle;
+}
+
+.Cell.alive {
   background-color: var(--alive);
+}
+
+.Cell.dead {
+  background-color: var(--dead);
 }
