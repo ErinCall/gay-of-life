@@ -5,8 +5,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>The Game of Life</p>
-        <p>GNU John Conway</p>
+        <p>Gay of Life</p>
       </header>
       <Gameboard />
     </div>
