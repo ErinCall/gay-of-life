@@ -33,7 +33,7 @@ function padEdges(cells) {
   }
 }
 
-function countLive(cells) {
+export function countLive(cells) {
   return cells.reduce((count, alive) => alive ? count + 1 : count, 0);
 }
 
