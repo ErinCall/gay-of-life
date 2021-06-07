@@ -1,22 +1,16 @@
-import { render } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import Gameboard, {countLive} from './Gameboard';
 
-describe('countLive', () => {
-  test('returns 0 for empty array', () => {
-    const cells = [];
-    const count = countLive(cells);
-    expect(count).toBe(0);
-  });
+test('renders a gameboard', () => {
+  const {container} = render(<Gameboard rows={50} cols={50} />);
+  const cells = container.querySelectorAll('.Cell');
+  expect(cells.length).toBe(2500);
+});
 
-  test('returns 0 for array of falses', () => {
-    const cells = [false, false, false];
-    const count = countLive(cells);
-    expect(count).toBe(0);
-  });
-
-  test('returns a count of trues', () => {
-    const cells = [false, true, false, true, false];
-    const count = countLive(cells);
-    expect(count).toBe(2);
-  });
+test('randomizes the gameboard', () => {
+  const {container} = render(<Gameboard rows={50} cols={50} />);
+  const alive = container.querySelectorAll('.alive');
+  const dead = container.querySelectorAll('.dead');
+  expect(alive.length).toBeGreaterThan(0);
+  expect(dead.length).toBeGreaterThan(0);
 });
