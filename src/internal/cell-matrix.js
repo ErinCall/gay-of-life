@@ -16,6 +16,20 @@ export default class CellMatrix {
     });
   }
 
+  tick() {
+    const newCells = this.cells.map(row => Array(row.length).fill(false));
+    for (let y = 0; y < this.cells.length; y++) {
+      for (let x = 0; x < this.cells[y].length; x++) {
+        const livingNeighbors = this.livingNeighbors(x, y);
+        if (livingNeighbors === 3 || (this.cells[y][x] && livingNeighbors === 2)) {
+          newCells[y][x] = true;
+        }
+      }
+    }
+
+    this.cells = newCells;
+  }
+
   livingNeighbors(x, y) {
     return [
       this.neighborUL(x,y), this.neighborU(x,y), this.neighborUR(x,y),

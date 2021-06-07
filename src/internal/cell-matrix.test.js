@@ -110,3 +110,76 @@ describe('neighbors', () => {
     expect(matrix.neighborL(1, 1)).toBe(false); // neighbor is dead
   });
 });
+
+describe('tick', () => {
+  test('life cannot thrive in a barren field', () => {
+    const matrix = new CellMatrix(3,3);
+    matrix.cells = [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+    ];
+
+    matrix.tick();
+    expect(matrix.cells).toEqual([
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+    ]);
+  });
+
+  test('to stand alone is to fall', () => {
+    const matrix = new CellMatrix(3,3);
+    matrix.cells = [
+      [false,  true, false],
+      [false, false, false],
+      [false,  true, false],
+    ];
+
+    matrix.tick();
+    expect(matrix.cells).toEqual([
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+    ]);
+  });
+
+  test('blinker', () => {
+    const matrix = new CellMatrix(3,3);
+    matrix.cells = [
+      [false,  true, false],
+      [false,  true, false],
+      [false,  true, false],
+    ];
+
+    matrix.tick();
+    expect(matrix.cells).toEqual([
+      [false, false, false],
+      [ true,  true,  true],
+      [false, false, false],
+    ]);
+
+    matrix.tick();
+    expect(matrix.cells).toEqual([
+      [false,  true, false],
+      [false,  true, false],
+      [false,  true, false],
+    ]);
+  });
+
+  test('block', () => {
+    const matrix = new CellMatrix(3,3);
+    matrix.cells = [
+      [false,  true,  true],
+      [false,  true,  true],
+      [false, false, false],
+    ];
+
+    matrix.tick();
+    expect(matrix.cells).toEqual([
+      [false,  true,  true],
+      [false,  true,  true],
+      [false, false, false],
+    ]);
+  });
+});
