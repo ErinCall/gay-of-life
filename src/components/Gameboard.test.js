@@ -26,80 +26,32 @@ test('randomizes the gameboard', () => {
   expect(dead.length).toBeGreaterThan(0);
 });
 
-describe('neighbors', () => {
-  let gameboard;
-  beforeEach(() => {
-    gameboard = new Gameboard({rows: 4, cols: 4});
-    gameboard.state.cells = [
-      [ true, false, false, false],
-      [false, false, false, false],
-      [false, false,  true,  true],
-      [false, false, false,  true],
-    ];
-  });
+test('livingNeighbors', () => {
+  const gameboard = new Gameboard({rows: 4, cols: 4});
+  const cells = [
+    [ true, false, false, false],
+    [false, false, false, false],
+    [false, false,  true,  true],
+    [false, false, false,  true],
+  ];
+  const neighborCounts = cells.map((row, y) =>
+    row.map((_, x) => gameboard.livingNeighbors(cells, x, y)));
 
-  test('livingNeighbors', () => {
-    expect(gameboard.livingNeighbors(0,0)).toBe(0);
-    expect(gameboard.livingNeighbors(1,0)).toBe(1);
-    expect(gameboard.livingNeighbors(0,1)).toBe(1);
-    expect(gameboard.livingNeighbors(2,1)).toBe(2);
-    expect(gameboard.livingNeighbors(2,3)).toBe(3);
-  });
+  expect(neighborCounts).toEqual([
+    [0, 1, 0, 0],
+    [1, 2, 2, 2],
+    [0, 1, 2, 2],
+    [0, 1, 3, 2],
+  ]);
 
-  test('up-left', () => {
-    expect(gameboard.neighborUL(1, 0)).toBe(false); // neighbor would be out of bounds
-    expect(gameboard.neighborUL(0, 1)).toBe(false); // neighbor would be out of bounds
-    expect(gameboard.neighborUL(1, 1)).toBe(true);
-    expect(gameboard.neighborUL(1, 2)).toBe(false); // neighbor is dead
-  });
-
-  test('up', () => {
-    expect(gameboard.neighborU(1, 0)).toBe(false); // neighbor would be out of bounds
-    expect(gameboard.neighborU(0, 1)).toBe(true);
-    expect(gameboard.neighborU(1, 1)).toBe(false); // neighbor is dead
-  });
-
-  test('up-right', () => {
-    expect(gameboard.neighborUR(2, 0)).toBe(false); // neighbor would be out of bounds
-    expect(gameboard.neighborUR(3, 1)).toBe(false); // neighbor would be out of bounds
-    expect(gameboard.neighborUR(1, 3)).toBe(true);
-    expect(gameboard.neighborUR(0, 3)).toBe(false); // neighbor is dead
-  });
-
-  test('right', () => {
-    expect(gameboard.neighborR(3, 1)).toBe(false); // neighbor would be out of bounds
-    expect(gameboard.neighborR(1, 2)).toBe(true);
-    expect(gameboard.neighborR(1, 1)).toBe(false); // neighbor is dead
-  });
-
-  test('down-right', () => {
-    expect(gameboard.neighborDR(3, 2)).toBe(false); // neighbor would be out of bounds
-    expect(gameboard.neighborDR(2, 3)).toBe(false); // neighbor would be out of bounds
-    expect(gameboard.neighborDR(2, 2)).toBe(true);
-    expect(gameboard.neighborDR(0, 2)).toBe(false); // neighbor is dead
-  });
-
-  test('down', () => {
-    expect(gameboard.neighborD(1, 3)).toBe(false); // neighbor would be out of bounds
-    expect(gameboard.neighborD(2, 1)).toBe(true);
-    expect(gameboard.neighborD(0, 2)).toBe(false); // neighbor is dead
-  });
-
-  test('down-left', () => {
-    expect(gameboard.neighborDL(0, 1)).toBe(false); // neighbor would be out of bounds
-    expect(gameboard.neighborDL(1, 3)).toBe(false); // neighbor would be out of bounds
-    expect(gameboard.neighborDL(3, 1)).toBe(true);
-    expect(gameboard.neighborDL(2, 1)).toBe(false); // neighbor is dead
-  });
-
-  test('left', () => {
-    expect(gameboard.neighborL(0, 1)).toBe(false); // neighbor would be out of bounds
-    expect(gameboard.neighborL(3, 2)).toBe(true);
-    expect(gameboard.neighborL(1, 1)).toBe(false); // neighbor is dead
-  });
+  expect(gameboard.livingNeighbors(cells, 0,0)).toBe(0);
+  expect(gameboard.livingNeighbors(cells, 1,0)).toBe(1);
+  expect(gameboard.livingNeighbors(cells, 0,1)).toBe(1);
+  expect(gameboard.livingNeighbors(cells, 2,1)).toBe(2);
+  expect(gameboard.livingNeighbors(cells, 2,3)).toBe(3);
 });
 
-describe('tick', () => {
+describe('nextGeneration', () => {
   test('life cannot thrive in a barren field', () => {
     const gameboard = new Gameboard({rows: 3, cols: 3});
     gameboard.state.cells = [
@@ -108,7 +60,7 @@ describe('tick', () => {
       [false, false, false],
     ];
 
-    gameboard.tick();
+    const nextGen = gameboard.nextGeneration();
     expect(gameboard.state.cells).toEqual([
       [false, false, false],
       [false, false, false],
@@ -124,8 +76,8 @@ describe('tick', () => {
       [false,  true, false],
     ];
 
-    gameboard.tick();
-    expect(gameboard.state.cells).toEqual([
+    const nextGen = gameboard.nextGeneration();
+    expect(nextGen).toEqual([
       [false, false, false],
       [false, false, false],
       [false, false, false],
@@ -140,15 +92,16 @@ describe('tick', () => {
       [false,  true, false],
     ];
 
-    gameboard.tick();
-    expect(gameboard.state.cells).toEqual([
+    let nextGen = gameboard.nextGeneration();
+    expect(nextGen).toEqual([
       [false, false, false],
       [ true,  true,  true],
       [false, false, false],
     ]);
+    gameboard.state.cells = nextGen;
 
-    gameboard.tick();
-    expect(gameboard.state.cells).toEqual([
+    nextGen = gameboard.nextGeneration();
+    expect(nextGen).toEqual([
       [false,  true, false],
       [false,  true, false],
       [false,  true, false],
@@ -163,8 +116,8 @@ describe('tick', () => {
       [false, false, false],
     ];
 
-    gameboard.tick();
-    expect(gameboard.state.cells).toEqual([
+    const nextGen = gameboard.nextGeneration();
+    expect(nextGen).toEqual([
       [false,  true,  true],
       [false,  true,  true],
       [false, false, false],
