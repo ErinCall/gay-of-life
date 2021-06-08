@@ -54,3 +54,7 @@
 .Cell.dead {
   background-color: var(--dead);
 }
+
+.GameControls {
+  display: inline-block;
+}

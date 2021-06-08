@@ -1,4 +1,4 @@
-const RANDOM_ALIVE_CHANCE = 1/50;
+const RANDOM_ALIVE_CHANCE = 1/5;
 
 export function randomized(cells) {
   return cells.map(row =>
