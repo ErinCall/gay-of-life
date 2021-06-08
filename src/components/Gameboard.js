@@ -1,47 +1,26 @@
 import React from 'react';
 
-const DEFAULT_ROWS = 50;
-const DEFAULT_COLS = 50;
-const RANDOM_ALIVE_CHANCE = 1/50;
-
 export default class Gameboard extends React.Component {
-  constructor(props) {
-    super(props);
-    const rows = props.rows || DEFAULT_ROWS;
-    const cols = props.cols || DEFAULT_COLS;
+  static DEFAULT_ROWS = 50;
+  static DEFAULT_COLS = 50;
+  static RANDOM_ALIVE_CHANCE = 1/50;
 
-    let cells = Array(rows).fill(null)
-        .map(() => Array(cols).fill(false));
-    cells = this.randomized(cells);
-
-    this.state = {
-      cells,
-    };
-  }
-
-  randomized(cells) {
+  static randomized(cells) {
     return cells.map(row =>
-      row.map(() => Math.random() < RANDOM_ALIVE_CHANCE)
+      row.map(() => Math.random() < this.RANDOM_ALIVE_CHANCE)
     );
   }
 
-  nextGeneration() {
-    return this.state.cells.map((row, y) =>
+  static nextGeneration(cells) {
+    return cells.map((row, y) =>
       row.map((alive, x) => {
-        const livingNeighbors = this.livingNeighbors(this.state.cells, x, y);
+        const livingNeighbors = this.livingNeighbors(cells, x, y);
         return livingNeighbors === 3 || (alive && livingNeighbors === 2)
       })
     );
   }
 
-  tick() {
-    this.setState({
-      ...this.state,
-      cells: this.nextGeneration(),
-    });
-  }
-
-  livingNeighbors(cells, x, y) {
+  static livingNeighbors(cells, x, y) {
     const neighborCoordinates = [
       [x-1, y-1], [x, y-1], [x+1, y-1],
       [x-1,   y],           [x+1,   y],
@@ -56,6 +35,27 @@ export default class Gameboard extends React.Component {
     return neighborCoordinates.map(([x, y]) => cells[y][x])
       .filter(alive => alive)
       .length;
+  }
+
+  constructor(props) {
+    super(props);
+    const rows = props.rows || this.DEFAULT_ROWS;
+    const cols = props.cols || this.DEFAULT_COLS;
+
+    let cells = Array(rows).fill(null)
+        .map(() => Array(cols).fill(false));
+    cells = this.constructor.randomized(cells);
+
+    this.state = {
+      cells,
+    };
+  }
+
+  tick() {
+    this.setState({
+      ...this.state,
+      cells: this.constructor.nextGeneration(this.state.cells),
+    });
   }
 
   render() {
