@@ -1,8 +1,8 @@
-const RANDOM_ALIVE_CHANCE = 1/5;
-
-export function randomized(cells) {
+// note that the rng argument is intended for testing, to ensure reproducible tests. It shouldn't be
+// necessary in production code.
+export function randomized(cells, lifeChance, rng=Math.random) {
   return cells.map(row =>
-    row.map(() => Math.random() < RANDOM_ALIVE_CHANCE)
+    row.map(() => rng() < lifeChance)
   );
 }
 

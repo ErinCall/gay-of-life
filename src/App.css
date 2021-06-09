@@ -16,7 +16,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: black;
   height: 10vh;
   padding: 0;
@@ -24,6 +23,7 @@
 
 .App-header p {
   margin: 0;
+  font-size: calc(10px + 2vmin);
 }
 
 .Gameboard {
@@ -55,6 +55,18 @@
   background-color: var(--dead);
 }
 
-.GameControls {
+.Control-bar {
   display: inline-block;
+}
+
+.Game-control {
+  display: inline-block;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border-right-style: solid;
+  border-right-width: 1px;
+}
+
+.Game-control:last-child {
+  border-right-style: none;
 }

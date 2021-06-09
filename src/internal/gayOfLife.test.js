@@ -1,4 +1,17 @@
+import seedrandom from 'seedrandom';
 import {randomized, nextGeneration, livingNeighbors} from './gayOfLife';
+
+test('randomized', () => {
+  const rng = new seedrandom('lol monkey cheese XD');
+  const cells = Array(4).fill(null).map(() => Array(4).fill(false));
+  const randCells = randomized(cells, 0.5, rng);
+  expect(randCells).toEqual([
+    [ false, false,  true,  true ],
+    [ false, false,  true,  true ],
+    [  true,  true, false,  true ],
+    [ false,  true,  true,  true ]
+  ]);
+});
 
 test('livingNeighbors', () => {
   const cells = [
