@@ -34,20 +34,6 @@
   margin-right: auto;
 }
 
-.Row {
-  display: flex;
-}
-
-.Cell {
-  display: inline-block;
-  height: calc(min(90vh, 100vw)/75);
-  width: calc(min(90vh, 100vw)/75);
-}
-
-.Cell.dead {
-  background-color: var(--dead);
-}
-
 .Control-bar {
   display: inline-block;
 }
