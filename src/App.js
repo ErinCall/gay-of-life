@@ -3,7 +3,9 @@ import './App.css';
 import Gameboard from './components/Gameboard';
 import TickControl from './components/TickControl';
 import RandomControl from './components/RandomControl';
+import FlagControl from './components/FlagControl';
 import {nextGeneration, randomized} from './internal/gayOfLife';
+import {flags} from './flags';
 
 class App extends React.Component {
   static DEFAULT_ROWS = 75;
@@ -17,6 +19,7 @@ class App extends React.Component {
     const rows = props.rows || this.constructor.DEFAULT_ROWS;
     const cols = props.cols || this.constructor.DEFAULT_COLS;
     this.state = {
+      currentFlag: 'rainbow',
       tickerID: null,
       tickInterval: this.constructor.DEFAULT_TICK_INTERVAL,
       lifeChance: this.constructor.DEFAULT_LIFE_CHANCE,
@@ -87,9 +90,19 @@ class App extends React.Component {
               interval={this.state.tickInterval}
               updateInterval={e => this.updateTickInterval(e.target.value)}
             />
+            <FlagControl
+              flags={flags}
+              currentFlag={this.state.currentFlag}
+              setCurrent={currentFlag => this.setState({currentFlag})}
+            />
           </div>
         </header>
-        <Gameboard cells={this.state.cells} toggleCell={(x, y) => this.toggleCell(x, y)} />
+        <Gameboard
+          cells={this.state.cells}
+          toggleCell={(x, y) => this.toggleCell(x, y)}
+          flagName={this.state.currentFlag}
+          flag={flags[this.state.currentFlag]}
+        />
       </div>
     );
   }

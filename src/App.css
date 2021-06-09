@@ -1,7 +1,8 @@
 :root {
   --neutral: #949994;
   --alive:   #ffffff;
-  --dead:  #000000;
+  --dead:  #444444;
+  --highlight: #8dc1f5;
 }
 
 .App {
@@ -27,7 +28,6 @@
 }
 
 .Gameboard {
-  display: table;
   width: calc(min(90vh, 100vw));
   height: calc(min(90vh, 100vw));
   margin-left: auto;
@@ -35,20 +35,13 @@
 }
 
 .Row {
-  display: table-row;
+  display: flex;
 }
 
 .Cell {
-  display: table-cell;
-  border-style: solid;
-  border-width: 0 1px 1px 0;
-  border-color: var(--neutral);
-  text-align: center;
-  vertical-align: middle;
-}
-
-.Cell.alive {
-  background-color: var(--alive);
+  display: inline-block;
+  height: calc(min(90vh, 100vw)/75);
+  width: calc(min(90vh, 100vw)/75);
 }
 
 .Cell.dead {
@@ -63,10 +56,29 @@
   display: inline-block;
   padding-left: 1vw;
   padding-right: 1vw;
+  height: 3vh;
   border-right-style: solid;
   border-right-width: 1px;
 }
 
 .Game-control:last-child {
   border-right-style: none;
+}
+
+.Flag-button {
+  height: 2vh;
+  width: 2vh;
+  display: inline;
+  border: 0.5vh;
+  border-style: solid;
+  border-color: var(--neutral);
+  border-width: 0.5vh;
+  position: relative;
+  top: 0.5vh;
+}
+
+.Flag-button.active {
+  border-color: var(--highlight);
+  border-radius: 0.25vh;
+  border-radius: 0.25vh;
 }
