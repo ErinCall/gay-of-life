@@ -5,31 +5,49 @@
   --highlight: #8dc1f5;
 }
 
+
+/*
+OK SO
+
+This sorta-kinda works:
+* Using `display: block` for the header does indeed make the header fit its content, as expected.
+* Setting Gameboard's height to 100% makes it 100% of its container, not (100% - height of the
+  App-header) like I hoped.
+* As expected, just using percentages for height/width creates rectangular cells when the viewport
+  is rectangular, so we need a way to match the cell-matrix's aspect ratio to its container's.
+  There's some stuff here
+  https://stackoverflow.com/questions/35153599/reactjs-get-height-of-an-element that looks
+  promising.
+
+*/
+
+
 .App {
   text-align: center;
-  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
   background-color: var(--neutral);
 }
 
 .App-header {
   background-color: var(--neutral);
-  display: flex;
-  flex-direction: column;
+  display: block;
   align-items: center;
   justify-content: center;
   color: black;
-  height: 10vh;
-  padding: 0;
+  padding: 0.5%;
 }
 
 .App-header p {
   margin: 0;
-  font-size: calc(10px + 2vmin);
+  font-size: 150%;
 }
 
 .Gameboard {
-  width: calc(min(90vh, 100vw));
-  height: calc(min(90vh, 100vw));
+  /*width: calc(min(90vh, 100vw));*/
+  /*height: calc(min(90vh, 100vw));*/
+  height:  100%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -40,9 +58,8 @@
 
 .Game-control {
   display: inline;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  height: 3vh;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   border-right-style: solid;
   border-right-width: 1px;
 }
