@@ -7,6 +7,8 @@ export default function TickControl(props) {
       <input
         type="number"
         size="3"
+        min="1"
+        inputmode="numeric"
         value={props.interval}
         onChange={props.updateInterval}
       />ms interval

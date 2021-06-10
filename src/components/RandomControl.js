@@ -4,7 +4,10 @@ export default function RandomControl(props) {
       <button onClick={props.randomize}> Randomize </button>
       <input
         type="number"
-        size="2"
+        size="3"
+        min="0"
+        max="100"
+        inputmode="numeric"
         value={Math.round(props.lifeChance)}
         onChange={props.updateLifeChance}
       />
