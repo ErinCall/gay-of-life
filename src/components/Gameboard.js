@@ -2,6 +2,9 @@ import React from 'react';
 import {createUseStyles} from 'react-jss'
 
 const useStyles = createUseStyles({
+  Gameboard: {
+    width: '100%',
+  },
   Row: props => ({
     display: 'flex',
     height: `${100/props.cells.length}%`,
@@ -11,9 +14,9 @@ const useStyles = createUseStyles({
     backgroundImage: `url(${props.flag})`,
     backgroundSize: ['100%', '100%'],
   }),
-  Dead: props => ({
+  Dead: {
     background: '#444444',
-  }),
+  },
   Cell: props => ({
     display: 'inline-block',
     height: '100%',
@@ -24,7 +27,7 @@ const useStyles = createUseStyles({
 export default function Gameboard(props) {
   const classes = useStyles(props);
   return (
-    <div className="Gameboard">
+    <div className={classes.Gameboard}>
       {props.cells.map((row, y) =>
         <div className={classes.Row} key={y}>
           {row.map((alive, x) =>
