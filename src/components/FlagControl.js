@@ -13,6 +13,7 @@ export default function FlagControl(props) {
           title={name}
           src={flag}
           onClick={() => props.setCurrent(name)}
+          role="button"
         />)
       })}
     </div>

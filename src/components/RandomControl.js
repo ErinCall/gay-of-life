@@ -7,7 +7,7 @@ export default function RandomControl(props) {
         size="3"
         min="0"
         max="100"
-        inputmode="numeric"
+        inputMode="numeric"
         value={Math.round(props.lifeChance)}
         onChange={props.updateLifeChance}
       />
