@@ -3,23 +3,22 @@ import {createUseStyles} from 'react-jss'
 
 const useStyles = createUseStyles({
   Gameboard: {
-    width: '100%',
+    gridColumnStart: 1,
+    gridColumnEnd: 5,
   },
   Row: props => ({
     display: 'flex',
     height: `${100/props.cells.length}%`,
-    width: '100%',
   }),
   Alive: props => ({
     backgroundImage: `url(${props.flag})`,
     backgroundSize: ['100%', '100%'],
   }),
   Dead: {
-    background: '#444444',
+    background: 'var(--dead)',
   },
   Cell: props => ({
     display: 'inline-block',
-    height: '100%',
     width: `${100/props.cells[0].length}%`,
   }),
 });
