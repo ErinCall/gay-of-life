@@ -41,20 +41,26 @@
   width: 2em;
 }
 
+#Flag-control {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
 .Flag-button {
-  height: 1em;
+  height: 3ex;
   border-style: solid;
   border-color: transparent;
-  border-width: 0.3ex;
+  border-width: 0.5ex;
   border-radius: 3px;
 }
 
 .Flag-button.active {
   border-color: var(--highlight);
-}
-
-.Flag-button:first-child {
-  margin-left: 0.3ex;
 }
 
 #Head-spacer {

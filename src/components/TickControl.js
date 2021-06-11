@@ -11,7 +11,7 @@ export default function TickControl(props) {
         inputmode="numeric"
         value={props.interval}
         onChange={props.updateInterval}
-      />ms interval
+      />ms
     </div>
   );
 }
