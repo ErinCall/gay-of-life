@@ -5587,6 +5587,11 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
+gcdlcm.js@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/gcdlcm.js/-/gcdlcm.js-1.0.4.tgz#d9ce5ad901c821bd219d039bc17ef92925403ba8"
+  integrity sha512-8WDPYEn0vvgIeNgahfiqE9P+u4AM2Wky1kt834GsC3MXrjB5Ehrv+EK3MKr6yLTXWK8Rm/udHJ5l2EsT99TTDQ==
+
 gensync@^1.0.0-beta.1:
   version "1.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"

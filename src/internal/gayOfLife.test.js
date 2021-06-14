@@ -1,5 +1,5 @@
 import seedrandom from 'seedrandom';
-import {randomized, nextGeneration, livingNeighbors} from './gayOfLife';
+import {randomized, nextGeneration, livingNeighbors, setAspectRatio} from './gayOfLife';
 
 test('randomized', () => {
   const rng = new seedrandom('lol monkey cheese XD');
@@ -102,6 +102,68 @@ describe('nextGeneration', () => {
       [false,  true,  true],
       [false,  true,  true],
       [false, false, false],
+    ]);
+  });
+});
+
+describe('setAspectRatio', () => {
+  test('no-op returns the same object', () => {
+    // This test may well be unnecessary, but I'm vaguely concerned about triggering an unnecessary
+    // re-render because this function caused the app's state to "change," and of course idempotence
+    // is always a nice thing to be able to assert about a function.
+    const cells = [
+      [false, false],
+      [false, false],
+    ];
+    expect(setAspectRatio(cells, 1, 1)).toBe(cells);
+  });
+
+  test('increase vertical dimension', () => {
+    const cells = [
+      [false, false],
+    ];
+
+    expect(setAspectRatio(cells, 1, 1)).toEqual([
+      [false, false],
+      [false, false],
+    ]);
+  });
+
+  test('increase horizontal dimension', () => {
+    const cells = [
+      [false],
+      [false],
+    ];
+
+    expect(setAspectRatio(cells, 1, 1)).toEqual([
+      [false, false],
+      [false, false],
+    ]);
+  });
+
+  test('increase horizontal and vertical dimensions', () => {
+    const cells = [
+      [false],
+      [false],
+    ];
+
+    expect(setAspectRatio(cells, 4, 3)).toEqual([
+      [false, false, false, false],
+      [false, false, false, false],
+      [false, false, false, false],
+    ]);
+  });
+
+  test('centers existing data between new rows/columns', () => {
+    const cells = [
+      [true, true, true],
+      [true, true, true],
+    ];
+    expect(setAspectRatio(cells, 5, 4)).toEqual([
+      [false, false, false, false, false],
+      [false,  true,  true,  true, false],
+      [false,  true,  true,  true, false],
+      [false, false, false, false, false],
     ]);
   });
 });
