@@ -25,13 +25,22 @@ const useStyles = createUseStyles({
 
 export default function Gameboard(props) {
   const classes = useStyles(props);
+  const cellClass = alive => {
+    let className = `Cell ${classes.Cell}`;
+    if (alive) {
+      className += ' alive ' + classes.Alive;
+    } else {
+      className += ' dead ' + classes.Dead;
+    }
+    return className
+  }
   return (
     <div className={classes.Gameboard}>
       {props.cells.map((row, y) =>
-        <div className={classes.Row} key={y}>
+        <div className={`Row ${classes.Row}`} key={y}>
           {row.map((alive, x) =>
             <div
-              className={`${classes.Cell} ${alive ? classes.Alive : classes.Dead}`}
+              className={cellClass(alive)}
               key={x}
               onClick={() => props.toggleCell(x, y)}
             ></div>
