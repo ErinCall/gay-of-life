@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/gay-of-life/static/css/main.409438f3.chunk.css",
-    "main.js": "/gay-of-life/static/js/main.00f5f717.chunk.js",
-    "main.js.map": "/gay-of-life/static/js/main.00f5f717.chunk.js.map",
+    "main.js": "/gay-of-life/static/js/main.a7322b22.chunk.js",
+    "main.js.map": "/gay-of-life/static/js/main.a7322b22.chunk.js.map",
     "runtime-main.js": "/gay-of-life/static/js/runtime-main.91ff20ab.js",
     "runtime-main.js.map": "/gay-of-life/static/js/runtime-main.91ff20ab.js.map",
     "static/js/2.5228ed86.chunk.js": "/gay-of-life/static/js/2.5228ed86.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.91ff20ab.js",
     "static/js/2.5228ed86.chunk.js",
     "static/css/main.409438f3.chunk.css",
-    "static/js/main.00f5f717.chunk.js"
+    "static/js/main.a7322b22.chunk.js"
   ]
 }
