@@ -4,7 +4,7 @@ import Gameboard from './components/Gameboard';
 import TickControl from './components/TickControl';
 import RandomControl from './components/RandomControl';
 import FlagControl from './components/FlagControl';
-import {nextGeneration, randomized} from './internal/gayOfLife';
+import {nextGeneration, randomized, setAspectRatio} from './internal/gayOfLife';
 import {flags} from './flags';
 
 class App extends React.Component {
@@ -17,7 +17,7 @@ class App extends React.Component {
     super(props);
 
     const rows = props.rows || this.constructor.DEFAULT_ROWS;
-    const cols = props.cols || this.constructor.DEFAULT_COLS;
+    const cols = 0;
     this.state = {
       currentFlag: 'rainbow',
       tickerID: null,
@@ -71,6 +71,23 @@ class App extends React.Component {
       tickerID,
       tickInterval: interval,
     });
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', () => this.adjustAspectRatio());
+    this.adjustAspectRatio();
+  }
+
+  adjustAspectRatio() {
+    const gameboard = document.querySelector('#Gameboard');
+    const width = Math.round(gameboard.clientWidth);
+    const height = Math.round(gameboard.clientHeight);
+    const adjusted = setAspectRatio(this.state.cells, width, height);
+    if (adjusted !== this.cells) {
+      this.setState({
+        cells: adjusted,
+      });
+    }
   }
 
   render() {

@@ -118,6 +118,12 @@ describe('setAspectRatio', () => {
     expect(setAspectRatio(cells, 1, 1)).toBe(cells);
   });
 
+  test('no-op when width or height is 0', () => {
+    const cells = [[false]];
+    expect(setAspectRatio(cells, 0, 1)).toBe(cells);
+    expect(setAspectRatio(cells, 1, 0)).toBe(cells);
+  });
+
   test('increase vertical dimension', () => {
     const cells = [
       [false, false],

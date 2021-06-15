@@ -35,18 +35,13 @@ export function livingNeighbors(cells, x, y) {
 }
 
 export function setAspectRatio(cells, width, height) {
+  if (width <= 0 || height <= 0) {
+    return cells;
+  }
   const currentRows = cells.length;
   const currentCols = cells[0].length;
 
-  // ARwidth/height are the numerator and denominator of the aspect ratio
-  const ARwidth = lcm(width, height) / height;
-  const ARheight = lcm(width, height) / width;
-
-  // We may need to multiply the ARwidth/height by some factor `m` in order to ensure
-  // desiredRows/cols are >= currentRows/cols
-  const m = Math.ceil(Math.max(currentCols / ARwidth, currentRows / ARheight))
-  const finalCols = m * ARwidth;
-  const finalRows = m * ARheight;
+  const {finalCols, finalRows} = dimensionsForAspectRatio(currentCols, currentRows, width, height);
 
   let result = cells;
   if (finalCols > currentCols) {
@@ -60,6 +55,20 @@ export function setAspectRatio(cells, width, height) {
     result = emptyMatrix(topRows, finalCols).concat(result, emptyMatrix(bottomRows, finalCols));
   }
   return result;
+}
+
+function dimensionsForAspectRatio(cols, rows, width, height) {
+  // ARwidth/height are the numerator and denominator of the aspect ratio
+  const ARwidth = lcm(width, height) / height;
+  const ARheight = lcm(width, height) / width;
+
+  // We may need to multiply the ARwidth/height by some factor `m` in order to ensure
+  // desiredRows/cols are >= currentRows/cols
+  const m = Math.ceil(Math.max(cols / ARwidth, rows / ARheight))
+  return {
+    finalCols: m * ARwidth,
+    finalRows: m * ARheight,
+  }
 }
 
 function emptyMatrix(rows, cols) {

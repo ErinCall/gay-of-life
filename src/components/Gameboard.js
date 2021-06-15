@@ -35,7 +35,7 @@ export default function Gameboard(props) {
     return className
   }
   return (
-    <div className={classes.Gameboard}>
+    <div className={classes.Gameboard} id="Gameboard">
       {props.cells.map((row, y) =>
         <div className={`Row ${classes.Row}`} key={y}>
           {row.map((alive, x) =>
