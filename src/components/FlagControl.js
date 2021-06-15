@@ -1,7 +1,6 @@
 export default function FlagControl(props) {
   return (
-    <div className="Game-control">
-      Flag:
+    <div className="Game-control" id="Flag-control">
       {Object.entries(props.flags).map(([name, flag]) => {
         let className = 'Flag-button';
         if (name === props.currentFlag) {
@@ -14,6 +13,7 @@ export default function FlagControl(props) {
           title={name}
           src={flag}
           onClick={() => props.setCurrent(name)}
+          role="button"
         />)
       })}
     </div>

@@ -76,27 +76,24 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <p>Gay of Life</p>
-          <div className="Control-bar">
-            <RandomControl
-              randomize={() => this.randomize()}
-              lifeChance={this.state.lifeChance*100}
-              updateLifeChance={e => this.updateLifeChance(e.target.value)}
-            />
-            <TickControl
-              toggle={() => this.toggleTicking()}
-              ticking={this.state.tickerID !== null}
-              interval={this.state.tickInterval}
-              updateInterval={e => this.updateTickInterval(e.target.value)}
-            />
-            <FlagControl
-              flags={flags}
-              currentFlag={this.state.currentFlag}
-              setCurrent={currentFlag => this.setState({currentFlag})}
-            />
-          </div>
-        </header>
+        <div id="Head-spacer"></div>
+        <div id="Title">Gay of Life</div>
+        <RandomControl
+          randomize={() => this.randomize()}
+          lifeChance={this.state.lifeChance*100}
+          updateLifeChance={e => this.updateLifeChance(e.target.value)}
+        />
+        <FlagControl
+          flags={flags}
+          currentFlag={this.state.currentFlag}
+          setCurrent={currentFlag => this.setState({currentFlag})}
+        />
+        <TickControl
+          toggle={() => this.toggleTicking()}
+          ticking={this.state.tickerID !== null}
+          interval={this.state.tickInterval}
+          updateInterval={e => this.updateTickInterval(e.target.value)}
+        />
         <Gameboard
           cells={this.state.cells}
           toggleCell={(x, y) => this.toggleCell(x, y)}

@@ -8,10 +8,10 @@ export default function TickControl(props) {
         type="number"
         size="3"
         min="1"
-        inputmode="numeric"
+        inputMode="numeric"
         value={props.interval}
         onChange={props.updateInterval}
-      />ms interval
+      />ms/generation
     </div>
   );
 }
