@@ -4,7 +4,7 @@ import {createUseStyles} from 'react-jss'
 const useStyles = createUseStyles({
   Gameboard: props => ({
     gridColumnStart: 1,
-    gridColumnEnd: 5,
+    gridColumnEnd: 7,
     display: 'grid',
     gridTemplateColumns: `1fr repeat(${props.cells[0].length}, 2ex) 1fr`,
     gridTemplateRows: `repeat(${props.cells.length}, 2ex)`,

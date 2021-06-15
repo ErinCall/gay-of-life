@@ -1,5 +1,5 @@
 import seedrandom from 'seedrandom';
-import {randomized, nextGeneration, livingNeighbors} from './gayOfLife';
+import {randomized, nextGeneration, livingNeighbors, setWidth, setHeight} from './gayOfLife';
 
 test('randomized', () => {
   const rng = new seedrandom('lol monkey cheese XD');
@@ -103,5 +103,123 @@ describe('nextGeneration', () => {
       [false,  true,  true],
       [false, false, false],
     ]);
+  });
+
+  describe('matrix expands to accomodate new life', () => {
+    test('expand top and bottom', () => {
+      const cells = [
+        [true, true, true],
+      ];
+
+      expect(nextGeneration(cells)).toEqual([
+        [false,  true, false],
+        [false,  true, false],
+        [false,  true, false],
+      ]);
+    });
+
+    test('expand left and right', () =>{
+      const cells = [
+        [true],
+        [true],
+        [true],
+      ];
+
+      expect(nextGeneration(cells)).toEqual([
+        [false, false, false],
+        [ true,  true,  true],
+        [false, false, false],
+      ]);
+    });
+
+    test('expand all four edges', () =>{
+      const cells = [
+        [true,  true, true],
+        [true, false, true],
+        [true,  true, true],
+      ];
+
+      expect(nextGeneration(cells)).toEqual([
+        [false, false,  true, false, false],
+        [false,  true, false,  true, false],
+        [ true, false, false, false,  true],
+        [false,  true, false,  true, false],
+        [false, false,  true, false, false],
+      ]);
+    });
+  });
+
+  describe('matrix contracts to focus on existing life', () => {
+    test('contract vertically', () => {
+      const cells = [
+        [false, false],
+        [false, false],
+        [false, false],
+        [ true,  true],
+        [ true,  true],
+        [false, false],
+        [false, false],
+        [false, false],
+      ];
+
+      expect(nextGeneration(cells)).toEqual([
+        [false, false],
+        [false, false],
+        [ true,  true],
+        [ true,  true],
+        [false, false],
+        [false, false],
+      ]);
+    });
+
+    test('contract horizontally', () => {
+      const cells = [
+        [false, false, false,  true,  true, false, false, false],
+        [false, false, false,  true,  true, false, false, false],
+        [false, false, false, false, false, false, false, false],
+      ];
+
+      expect(nextGeneration(cells)).toEqual([
+        [false, false,  true,  true, false, false],
+        [false, false,  true,  true, false, false],
+        [false, false, false, false, false, false],
+      ]);
+    });
+  });
+});
+
+describe('set dimensions', () => {
+  test('no-op returns the same object', () => {
+    const cells = [[false]];
+    expect(setWidth(cells, 1)).toBe(cells);
+    expect(setHeight(cells, 1)).toBe(cells);
+  });
+
+  test('add rows at the bottom', () => {
+    const cells = [[false]];
+    expect(setHeight(cells, 3)).toEqual([
+      [false],
+      [false],
+      [false],
+    ]);
+  });
+
+  test('remove rows from the bottom', () => {
+    const cells = [
+      [false],
+      [false],
+      [false],
+    ];
+    expect(setHeight(cells, 1)).toEqual([[false]]);
+  });
+
+  test('add cols on the right', () => {
+    const cells = [[false]];
+    expect(setWidth(cells, 3)).toEqual([[false, false, false]]);
+  });
+
+  test('remove cols from the right', () => {
+    const cells = [[false, false, false]];
+    expect(setWidth(cells, 1)).toEqual([[false]]);
   });
 });
