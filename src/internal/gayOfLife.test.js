@@ -1,5 +1,5 @@
 import seedrandom from 'seedrandom';
-import {randomized, nextGeneration, livingNeighbors} from './gayOfLife';
+import {randomized, nextGeneration, livingNeighbors, setWidth, setHeight} from './gayOfLife';
 
 test('randomized', () => {
   const rng = new seedrandom('lol monkey cheese XD');
@@ -185,5 +185,41 @@ describe('nextGeneration', () => {
         [false, false, false, false, false, false],
       ]);
     });
+  });
+});
+
+describe('set dimensions', () => {
+  test('no-op returns the same object', () => {
+    const cells = [[false]];
+    expect(setWidth(cells, 1)).toBe(cells);
+    expect(setHeight(cells, 1)).toBe(cells);
+  });
+
+  test('add rows at the bottom', () => {
+    const cells = [[false]];
+    expect(setHeight(cells, 3)).toEqual([
+      [false],
+      [false],
+      [false],
+    ]);
+  });
+
+  test('remove rows from the bottom', () => {
+    const cells = [
+      [false],
+      [false],
+      [false],
+    ];
+    expect(setHeight(cells, 1)).toEqual([[false]]);
+  });
+
+  test('add cols on the right', () => {
+    const cells = [[false]];
+    expect(setWidth(cells, 3)).toEqual([[false, false, false]]);
+  });
+
+  test('remove cols from the right', () => {
+    const cells = [[false, false, false]];
+    expect(setWidth(cells, 1)).toEqual([[false]]);
   });
 });

@@ -4,7 +4,8 @@ import Gameboard from './components/Gameboard';
 import TickControl from './components/TickControl';
 import RandomControl from './components/RandomControl';
 import FlagControl from './components/FlagControl';
-import {nextGeneration, randomized} from './internal/gayOfLife';
+import SizeControl from './components/SizeControl';
+import {nextGeneration, randomized, setWidth, setHeight} from './internal/gayOfLife';
 import {flags} from './flags';
 
 class App extends React.Component {
@@ -73,6 +74,14 @@ class App extends React.Component {
     });
   }
 
+  updateCols(cols) {
+    this.setState({cells: setWidth(this.state.cells, Number(cols))});
+  }
+
+  updateRows(rows) {
+    this.setState({cells: setHeight(this.state.cells, Number(rows))});
+  }
+
   render() {
     return (
       <div className="App">
@@ -93,6 +102,11 @@ class App extends React.Component {
           ticking={this.state.tickerID !== null}
           interval={this.state.tickInterval}
           updateInterval={e => this.updateTickInterval(e.target.value)}
+        />
+        <SizeControl
+          cells={this.state.cells}
+          updateCols={e => this.updateCols(e.target.value)}
+          updateRows={e => this.updateRows(e.target.value)}
         />
         <Gameboard
           cells={this.state.cells}

@@ -36,6 +36,29 @@ export function livingNeighbors(cells, x, y) {
     .length;
 }
 
+export function setWidth(cells, width) {
+  const currentWidth = cells[0].length;
+  if (width > currentWidth) {
+    return cells.map(row => row.concat(Array(width - currentWidth).fill(false)));
+  } else if (width < currentWidth) {
+    return cells.map(row => row.slice(0, width - currentWidth));
+  } else {
+    return cells;
+  }
+}
+
+export function setHeight(cells, height) {
+  if (height > cells.length) {
+    return Array(height - cells.length).fill(null)
+      .map(() => Array(cells[0].length).fill(false))
+      .concat(cells);
+  } else if (height < cells.length) {
+    return cells.slice(0, height - cells.length);
+  } else {
+    return cells;
+  }
+}
+
 // If any of the outermost rows/cols have three adjacent live cells, we'll need to expand the matrix
 // so life can grow out into the space beyond what's currently computed.
 function expand(cells) {
