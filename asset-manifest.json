@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/gay-of-life/static/css/main.00430a5a.chunk.css",
-    "main.js": "/gay-of-life/static/js/main.e1004697.chunk.js",
-    "main.js.map": "/gay-of-life/static/js/main.e1004697.chunk.js.map",
+    "main.css": "/gay-of-life/static/css/main.e9bbae0f.chunk.css",
+    "main.js": "/gay-of-life/static/js/main.9369f780.chunk.js",
+    "main.js.map": "/gay-of-life/static/js/main.9369f780.chunk.js.map",
     "runtime-main.js": "/gay-of-life/static/js/runtime-main.a22b7a0c.js",
     "runtime-main.js.map": "/gay-of-life/static/js/runtime-main.a22b7a0c.js.map",
-    "static/js/2.434fc782.chunk.js": "/gay-of-life/static/js/2.434fc782.chunk.js",
-    "static/js/2.434fc782.chunk.js.map": "/gay-of-life/static/js/2.434fc782.chunk.js.map",
+    "static/js/2.4d626ef4.chunk.js": "/gay-of-life/static/js/2.4d626ef4.chunk.js",
+    "static/js/2.4d626ef4.chunk.js.map": "/gay-of-life/static/js/2.4d626ef4.chunk.js.map",
     "static/js/3.9bdeb3b9.chunk.js": "/gay-of-life/static/js/3.9bdeb3b9.chunk.js",
     "static/js/3.9bdeb3b9.chunk.js.map": "/gay-of-life/static/js/3.9bdeb3b9.chunk.js.map",
     "index.html": "/gay-of-life/index.html",
-    "static/css/main.00430a5a.chunk.css.map": "/gay-of-life/static/css/main.00430a5a.chunk.css.map",
-    "static/js/2.434fc782.chunk.js.LICENSE.txt": "/gay-of-life/static/js/2.434fc782.chunk.js.LICENSE.txt"
+    "static/css/main.e9bbae0f.chunk.css.map": "/gay-of-life/static/css/main.e9bbae0f.chunk.css.map",
+    "static/js/2.4d626ef4.chunk.js.LICENSE.txt": "/gay-of-life/static/js/2.4d626ef4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a22b7a0c.js",
-    "static/js/2.434fc782.chunk.js",
-    "static/css/main.00430a5a.chunk.css",
-    "static/js/main.e1004697.chunk.js"
+    "static/js/2.4d626ef4.chunk.js",
+    "static/css/main.e9bbae0f.chunk.css",
+    "static/js/main.9369f780.chunk.js"
   ]
 }
