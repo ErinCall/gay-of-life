@@ -8,7 +8,7 @@
 
 .App {
   min-height: 100vh;
-  min-width: 100vw;
+  min-width: max-content;
   padding-top: 0.5ex;
   background-color: var(--neutral);
   display: grid;

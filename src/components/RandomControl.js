@@ -1,7 +1,7 @@
 export default function RandomControl(props) {
   return (
     <div className="Game-control">
-      <button onClick={props.randomize}> Random </button>
+      <button onClick={props.randomize}> Randomize </button>
       <input
         type="number"
         size="3"
@@ -11,7 +11,7 @@ export default function RandomControl(props) {
         value={Math.round(props.lifeChance)}
         onChange={props.updateLifeChance}
       />
-      %
+      % alive
     </div>
   );
 }
