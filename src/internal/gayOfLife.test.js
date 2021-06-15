@@ -104,4 +104,48 @@ describe('nextGeneration', () => {
       [false, false, false],
     ]);
   });
+
+  describe('matrix expands to accomodate new life', () => {
+    test('expand top and bottom', () => {
+      const cells = [
+        [true, true, true],
+      ];
+
+      expect(nextGeneration(cells)).toEqual([
+        [false,  true, false],
+        [false,  true, false],
+        [false,  true, false],
+      ]);
+    });
+
+    test('expand left and right', () =>{
+      const cells = [
+        [true],
+        [true],
+        [true],
+      ];
+
+      expect(nextGeneration(cells)).toEqual([
+        [false, false, false],
+        [ true,  true,  true],
+        [false, false, false],
+      ]);
+    });
+
+    test('expand all four edges', () =>{
+      const cells = [
+        [true,  true, true],
+        [true, false, true],
+        [true,  true, true],
+      ];
+
+      expect(nextGeneration(cells)).toEqual([
+        [false, false,  true, false, false],
+        [false,  true, false,  true, false],
+        [ true, false, false, false,  true],
+        [false,  true, false,  true, false],
+        [false, false,  true, false, false],
+      ]);
+    });
+  });
 });

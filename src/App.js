@@ -8,8 +8,8 @@ import {nextGeneration, randomized} from './internal/gayOfLife';
 import {flags} from './flags';
 
 class App extends React.Component {
-  static DEFAULT_ROWS = 75;
-  static DEFAULT_COLS = 75;
+  static DEFAULT_ROWS = 50;
+  static DEFAULT_COLS = 50;
   static DEFAULT_LIFE_CHANCE = 0.25;
   static DEFAULT_TICK_INTERVAL = 250;
 
