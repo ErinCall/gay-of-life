@@ -148,4 +148,42 @@ describe('nextGeneration', () => {
       ]);
     });
   });
+
+  describe('matrix contracts to focus on existing life', () => {
+    test('contract vertically', () => {
+      const cells = [
+        [false, false],
+        [false, false],
+        [false, false],
+        [ true,  true],
+        [ true,  true],
+        [false, false],
+        [false, false],
+        [false, false],
+      ];
+
+      expect(nextGeneration(cells)).toEqual([
+        [false, false],
+        [false, false],
+        [ true,  true],
+        [ true,  true],
+        [false, false],
+        [false, false],
+      ]);
+    });
+
+    test('contract horizontally', () => {
+      const cells = [
+        [false, false, false,  true,  true, false, false, false],
+        [false, false, false,  true,  true, false, false, false],
+        [false, false, false, false, false, false, false, false],
+      ];
+
+      expect(nextGeneration(cells)).toEqual([
+        [false, false,  true,  true, false, false],
+        [false, false,  true,  true, false, false],
+        [false, false, false, false, false, false],
+      ]);
+    });
+  });
 });
