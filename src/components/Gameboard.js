@@ -2,13 +2,12 @@ import React from 'react';
 import {createUseStyles} from 'react-jss'
 
 const useStyles = createUseStyles({
-  Gameboard: {
+  Gameboard: props => ({
     gridColumnStart: 1,
     gridColumnEnd: 5,
-  },
-  Row: props => ({
-    display: 'flex',
-    height: `${100/props.cells.length}%`,
+    display: 'grid',
+    gridTemplateColumns: `1fr repeat(${props.cells[0].length}, 2ex) 1fr`,
+    gridTemplateRows: `repeat(${props.cells.length}, 2ex)`,
   }),
   Alive: props => ({
     backgroundImage: `url(${props.flag})`,
@@ -17,36 +16,23 @@ const useStyles = createUseStyles({
   Dead: {
     background: 'var(--dead)',
   },
-  Cell: props => ({
-    display: 'inline-block',
-    width: `${100/props.cells[0].length}%`,
-  }),
 });
 
 export default function Gameboard(props) {
   const classes = useStyles(props);
-  const cellClass = alive => {
-    let className = `Cell ${classes.Cell}`;
-    if (alive) {
-      className += ' alive ' + classes.Alive;
-    } else {
-      className += ' dead ' + classes.Dead;
-    }
-    return className
-  }
   return (
     <div className={classes.Gameboard}>
-      {props.cells.map((row, y) =>
-        <div className={`Row ${classes.Row}`} key={y}>
-          {row.map((alive, x) =>
+      {props.cells.map((row, y) => [
+        <div key={`${y}-pad-left`}></div>,
+        ...row.map((alive, x) =>
             <div
-              className={cellClass(alive)}
+              className={alive ? ' alive ' + classes.Alive : ' dead ' + classes.Dead}
               key={x}
               onClick={() => props.toggleCell(x, y)}
             ></div>
-          )}
-        </div>
-      )}
+        ),
+        <div key={`${y}-pad-right`}></div>
+      ])}
     </div>
   );
 }
