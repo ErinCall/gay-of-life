@@ -8,14 +8,13 @@ const useStyles = createUseStyles({
     display: 'grid',
     gridTemplateColumns: `1fr repeat(${props.cells[0].length}, 2ex) 1fr`,
     gridTemplateRows: `repeat(${props.cells.length}, 2ex)`,
+    background: 'var(--dead)',
   }),
   Alive: props => ({
     backgroundImage: `url(${props.flag})`,
     backgroundSize: ['100%', '100%'],
+    borderRadius: '2px',
   }),
-  Dead: {
-    background: 'var(--dead)',
-  },
 });
 
 export default function Gameboard(props) {
