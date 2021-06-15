@@ -7,8 +7,8 @@ test('renders the provided cells', () => {
     [ true, false,  true],
     [false, false, false],
   ]} />);
-  const alive = container.querySelectorAll('.alive');
-  expect(alive.length).toBe(3);
-  const dead = container.querySelectorAll('.dead');
-  expect(dead.length).toBe(6);
+  const queer = container.querySelectorAll('.queer');
+  expect(queer.length).toBe(3);
+  const straight = container.querySelectorAll('.straight');
+  expect(straight.length).toBe(6);
 });

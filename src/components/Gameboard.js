@@ -8,9 +8,9 @@ const useStyles = createUseStyles({
     display: 'grid',
     gridTemplateColumns: `1fr repeat(${props.cells[0].length}, 2ex) 1fr`,
     gridTemplateRows: `repeat(${props.cells.length}, 2ex)`,
-    background: 'var(--dead)',
+    background: 'var(--straight)',
   }),
-  Alive: props => ({
+  Queer: props => ({
     backgroundImage: `url(${props.flag})`,
     backgroundSize: ['100%', '100%'],
     borderRadius: '2px',
@@ -23,9 +23,9 @@ export default function Gameboard(props) {
     <div className={classes.Gameboard}>
       {props.cells.map((row, y) => [
         <div key={`${y}-pad-left`}></div>,
-        ...row.map((alive, x) =>
+        ...row.map((queer, x) =>
             <div
-              className={alive ? ' alive ' + classes.Alive : ' dead ' + classes.Dead}
+              className={queer ? 'queer ' + classes.Queer : 'straight'}
               key={x}
               onClick={() => props.toggleCell(x, y)}
             ></div>

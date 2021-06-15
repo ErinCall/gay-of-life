@@ -1,5 +1,5 @@
 import seedrandom from 'seedrandom';
-import {randomized, nextGeneration, livingNeighbors, setWidth, setHeight} from './gayOfLife';
+import {randomized, nextGeneration, queerNeighbors, setWidth, setHeight} from './gayOfLife';
 
 test('randomized', () => {
   const rng = new seedrandom('lol monkey cheese XD');
@@ -13,7 +13,7 @@ test('randomized', () => {
   ]);
 });
 
-test('livingNeighbors', () => {
+test('queerNeighbors', () => {
   const cells = [
     [ true, false, false, false],
     [false, false, false, false],
@@ -21,7 +21,7 @@ test('livingNeighbors', () => {
     [false, false, false,  true],
   ];
   const neighborCounts = cells.map((row, y) =>
-    row.map((_, x) => livingNeighbors(cells, x, y)));
+    row.map((_, x) => queerNeighbors(cells, x, y)));
 
   expect(neighborCounts).toEqual([
     [0, 1, 0, 0],
@@ -30,11 +30,11 @@ test('livingNeighbors', () => {
     [0, 1, 3, 2],
   ]);
 
-  expect(livingNeighbors(cells, 0,0)).toBe(0);
-  expect(livingNeighbors(cells, 1,0)).toBe(1);
-  expect(livingNeighbors(cells, 0,1)).toBe(1);
-  expect(livingNeighbors(cells, 2,1)).toBe(2);
-  expect(livingNeighbors(cells, 2,3)).toBe(3);
+  expect(queerNeighbors(cells, 0,0)).toBe(0);
+  expect(queerNeighbors(cells, 1,0)).toBe(1);
+  expect(queerNeighbors(cells, 0,1)).toBe(1);
+  expect(queerNeighbors(cells, 2,1)).toBe(2);
+  expect(queerNeighbors(cells, 2,3)).toBe(3);
 });
 
 describe('nextGeneration', () => {
@@ -105,7 +105,7 @@ describe('nextGeneration', () => {
     ]);
   });
 
-  describe('matrix expands to accomodate new life', () => {
+  describe('matrix expands to accomodate new gays', () => {
     test('expand top and bottom', () => {
       const cells = [
         [true, true, true],
@@ -149,7 +149,7 @@ describe('nextGeneration', () => {
     });
   });
 
-  describe('matrix contracts to focus on existing life', () => {
+  describe('matrix contracts to focus on existing gays', () => {
     test('contract vertically', () => {
       const cells = [
         [false, false],

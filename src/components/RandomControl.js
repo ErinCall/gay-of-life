@@ -8,10 +8,10 @@ export default function RandomControl(props) {
         min="0"
         max="100"
         inputMode="numeric"
-        value={Math.round(props.lifeChance)}
-        onChange={props.updateLifeChance}
+        value={Math.round(props.queerChance)}
+        onChange={props.updateQueerChance}
       />
-      % alive
+      % gay
     </div>
   );
 }

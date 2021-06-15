@@ -12,14 +12,14 @@ export function nextGeneration(cells) {
   cells = contract(cells);
   cells = expand(cells);
   return cells.map((row, y) =>
-    row.map((alive, x) => {
-      const living = livingNeighbors(cells, x, y);
-      return living === 3 || (alive && living === 2)
+    row.map((queer, x) => {
+      const queers = queerNeighbors(cells, x, y);
+      return queers === 3 || (queer && queers === 2)
     })
   );
 }
 
-export function livingNeighbors(cells, x, y) {
+export function queerNeighbors(cells, x, y) {
   const neighborCoordinates = [
     [x-1, y-1], [x, y-1], [x+1, y-1],
     [x-1,   y],           [x+1,   y],
@@ -32,7 +32,7 @@ export function livingNeighbors(cells, x, y) {
   );
 
   return neighborCoordinates.map(([x, y]) => cells[y][x])
-    .filter(alive => alive)
+    .filter(queer => queer)
     .length;
 }
 
@@ -59,8 +59,8 @@ export function setHeight(cells, height) {
   }
 }
 
-// If any of the outermost rows/cols have three adjacent live cells, we'll need to expand the matrix
-// so life can grow out into the space beyond what's currently computed.
+// If any of the outermost rows/cols have three adjacent queer cells, we'll need to expand the
+// matrix so gayness can grow out into the space beyond what's currently computed.
 function expand(cells) {
   let needTop = false;
   let needBottom = false;
@@ -101,7 +101,7 @@ function expand(cells) {
   return cells;
 }
 
-// If there are no live cells for several rows/cols from the edge, prune that edge by one row/col.
+// If there are no queer cells for several rows/cols from the edge, prune that edge by one row/col.
 // The threshold for pruning is larger than the amount pruned in an attempt to prevent bouncing.
 // Look, this is absolutely over-micro-optimized. NO RAGRETS. In short, the needSIDE variables
 // indicate whether we need to prune that side. We'll never prune a matrix to less than twice the

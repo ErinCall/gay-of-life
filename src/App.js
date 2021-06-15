@@ -11,7 +11,7 @@ import {flags} from './flags';
 class App extends React.Component {
   static DEFAULT_ROWS = 50;
   static DEFAULT_COLS = 50;
-  static DEFAULT_LIFE_CHANCE = 0.25;
+  static DEFAULT_QUEER_CHANCE = 0.25;
   static DEFAULT_TICK_INTERVAL = 250;
 
   constructor(props) {
@@ -23,7 +23,7 @@ class App extends React.Component {
       currentFlag: 'rainbow',
       tickerID: null,
       tickInterval: this.constructor.DEFAULT_TICK_INTERVAL,
-      lifeChance: this.constructor.DEFAULT_LIFE_CHANCE,
+      queerChance: this.constructor.DEFAULT_QUEER_CHANCE,
       cells: Array(rows).fill(null).map(() => Array(cols).fill(false)),
     };
   }
@@ -52,13 +52,13 @@ class App extends React.Component {
 
   randomize() {
     this.setState({
-      cells: randomized(this.state.cells, this.state.lifeChance),
+      cells: randomized(this.state.cells, this.state.queerChance),
     });
   }
 
-  updateLifeChance(percentChance) {
+  updateQueerChance(percentChance) {
     this.setState({
-      lifeChance: percentChance/100,
+      queerChance: percentChance/100,
     });
   }
 
@@ -89,8 +89,8 @@ class App extends React.Component {
         <div id="Title">Gay of Life</div>
         <RandomControl
           randomize={() => this.randomize()}
-          lifeChance={this.state.lifeChance*100}
-          updateLifeChance={e => this.updateLifeChance(e.target.value)}
+          queerChance={this.state.queerChance*100}
+          updateQueerChance={e => this.updateQueerChance(e.target.value)}
         />
         <FlagControl
           flags={flags}
